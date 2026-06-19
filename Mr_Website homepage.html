@@ -103,6 +103,7 @@
   .btn-primary{background:var(--cyan);color:#04201c;}
   .btn-ghost{background:transparent;border:1px solid var(--panel-edge);color:var(--text);}
   .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+  .btn:disabled{opacity:0.4;cursor:not-allowed;}
 
   /* ---------- sections ---------- */
   section{padding:70px 5%;border-bottom:1px solid var(--panel-edge);}
@@ -128,6 +129,21 @@
   .card h3{margin:0 0 8px;font-family:'Audiowide',sans-serif;font-size:1.1rem;}
   .card p{color:var(--muted);font-size:0.92rem;margin:0 0 14px;line-height:1.5;}
   .card .stat{display:flex;gap:18px;font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--good);}
+  .card .by{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--muted);margin-top:10px;display:block;}
+  .card .by .role{color:var(--violet);}
+  .card .removeBtn{
+    position:absolute;top:14px;right:14px;background:transparent;border:none;
+    color:var(--muted);cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:0.7rem;
+  }
+  .card .removeBtn:hover{color:var(--magenta);}
+
+  .empty-state{
+    grid-column:1/-1;
+    text-align:center;padding:50px 20px;
+    border:1px dashed var(--panel-edge);border-radius:6px;color:var(--muted);
+    font-family:'JetBrains Mono',monospace;font-size:0.9rem;
+  }
+  .empty-state a{cursor:pointer;}
 
   /* VR banner */
   .vr-banner{
@@ -142,7 +158,7 @@
 
   /* ---------- account / auth panel ---------- */
   #accountSection .panel{
-    max-width:480px;margin:0 auto;
+    max-width:520px;margin:0 auto;
     background:var(--panel);border:1px solid var(--panel-edge);border-radius:8px;
     padding:34px;
   }
@@ -151,17 +167,28 @@
   .panel-tab.active{background:var(--cyan);color:#04201c;}
   .field{margin-bottom:16px;}
   .field label{display:block;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:6px;letter-spacing:0.5px;}
-  .field input,.field textarea{
+  .field input,.field textarea,.field select{
     width:100%;padding:11px 12px;background:#04050a;border:1px solid var(--panel-edge);
     border-radius:4px;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:0.95rem;
   }
-  .field input:focus,.field textarea:focus{outline:none;border-color:var(--cyan);}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--cyan);}
   .form-error{color:var(--magenta);font-size:0.82rem;font-family:'JetBrains Mono',monospace;min-height:18px;margin-bottom:6px;}
+
+  .role-options{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:6px;}
+  @media(max-width:560px){.role-options{grid-template-columns:1fr;}}
+  .role-card{
+    border:1px solid var(--panel-edge);border-radius:6px;padding:14px 12px;cursor:pointer;
+    background:#04050a;transition:border-color .15s;
+  }
+  .role-card input{display:none;}
+  .role-card.selected{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan) inset;}
+  .role-card .r-title{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--text);margin-bottom:4px;display:block;}
+  .role-card .r-desc{font-size:0.78rem;color:var(--muted);line-height:1.4;display:block;}
 
   /* profile (terminal style) */
   #profileSection{display:none;}
   .terminal{
-    max-width:700px;margin:0 auto;
+    max-width:760px;margin:0 auto;
     background:#04050a;border:1px solid var(--cyan);border-radius:8px;
     box-shadow:0 0 30px rgba(0,246,224,0.08);
     overflow:hidden;
@@ -176,13 +203,26 @@
   .terminal-body{padding:28px;font-family:'JetBrains Mono',monospace;}
   .term-line{color:var(--good);margin-bottom:6px;font-size:0.85rem;}
   .term-line .pfx{color:var(--muted);}
+  .role-badge{
+    display:inline-block;margin-left:10px;padding:2px 8px;border-radius:3px;
+    font-size:0.72rem;background:rgba(123,63,242,0.2);color:var(--violet);border:1px solid var(--violet);
+  }
   .profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;}
   @media(max-width:600px){.profile-grid{grid-template-columns:1fr;}}
   .profile-grid .field{margin-bottom:0;}
   .profile-grid label{font-family:'JetBrains Mono',monospace;}
-  .save-row{display:flex;gap:12px;margin-top:24px;align-items:center;}
+  .save-row{display:flex;gap:12px;margin-top:24px;align-items:center;flex-wrap:wrap;}
   #logoutBtn{background:transparent;color:var(--magenta);border:1px solid var(--magenta);padding:10px 18px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:0.82rem;cursor:pointer;}
   #saveStatus{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--good);}
+
+  .upload-block{
+    margin-top:30px;padding-top:26px;border-top:1px dashed var(--panel-edge);
+  }
+  .upload-block .term-line{margin-bottom:14px;}
+  .locked-note{
+    margin-top:30px;padding:16px;border:1px dashed var(--panel-edge);border-radius:6px;
+    color:var(--muted);font-size:0.82rem;line-height:1.5;
+  }
 
   footer{padding:36px 5%;text-align:center;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:0.8rem;}
   footer span{color:var(--cyan);}
@@ -214,28 +254,11 @@
 
 <section id="games">
   <div class="section-head">
-    <div class="section-title">current <span class="accent">builds</span></div>
-    <div class="section-tag">status: in rotation</div>
+    <div class="section-title">community <span class="accent">builds</span></div>
+    <div class="section-tag">uploaded by developers &amp; groups</div>
   </div>
-  <div class="grid">
-    <div class="card">
-      <span class="tag">OBBY // CO-OP</span>
-      <h3>Glitch Tower</h3>
-      <p>A vertical obby that rewrites its own layout every floor. Bring a friend, the checkpoints are merciless.</p>
-      <div class="stat"><span>● live</span><span>4.6★</span></div>
-    </div>
-    <div class="card">
-      <span class="tag">PVP // ARENA</span>
-      <h3>Static District</h3>
-      <p>Low-gravity arena shooter set in a neon-soaked sublevel. Weekly map rotation, ranked seasons coming soon.</p>
-      <div class="stat"><span>● live</span><span>4.3★</span></div>
-    </div>
-    <div class="card">
-      <span class="tag">SANDBOX</span>
-      <h3>Wire & Rust</h3>
-      <p>Build, automate, and break things in a junkyard sandbox with real circuitry logic.</p>
-      <div class="stat"><span>● in dev</span><span>early access</span></div>
-    </div>
+  <div class="grid" id="gamesGrid">
+    <!-- games render here from storage -->
   </div>
 </section>
 
@@ -276,6 +299,28 @@
       <form id="signupForm" style="display:none;">
         <div class="field"><label>choose a username</label><input type="text" id="suUser" required></div>
         <div class="field"><label>choose a password</label><input type="password" id="suPass" required></div>
+
+        <div class="field">
+          <label>account type</label>
+          <div class="role-options" id="roleOptions">
+            <label class="role-card selected" data-role="player">
+              <input type="radio" name="role" value="player" checked>
+              <span class="r-title">Player</span>
+              <span class="r-desc">Just here to play and hang out. Browse games, join VR nights, build a profile.</span>
+            </label>
+            <label class="role-card" data-role="developer">
+              <input type="radio" name="role" value="developer">
+              <span class="r-title">Developer</span>
+              <span class="r-desc">You make games solo. Upload your own builds under your username.</span>
+            </label>
+            <label class="role-card" data-role="group">
+              <input type="radio" name="role" value="group">
+              <span class="r-title">Group</span>
+              <span class="r-desc">You represent a dev team or community. Upload games under your group's name.</span>
+            </label>
+          </div>
+        </div>
+
         <div class="form-error" id="suError"></div>
         <button type="submit" class="btn btn-primary" style="width:100%;">create account</button>
       </form>
@@ -290,7 +335,9 @@
       </div>
       <div class="terminal-body">
         <div class="term-line"><span class="pfx">$</span> whoami</div>
-        <div class="term-line" id="termWhoAmI">guest</div>
+        <div class="term-line">
+          <span id="termWhoAmI">guest</span><span class="role-badge" id="roleBadge">player</span>
+        </div>
         <div class="term-line"><span class="pfx">$</span> edit profile --interactive</div>
 
         <div class="profile-grid">
@@ -299,13 +346,44 @@
           <div class="field"><label>speedrun.com profile</label><input type="text" id="pSpeedrun" placeholder="https://speedrun.com/user/you"></div>
           <div class="field"><label>roblox profile</label><input type="text" id="pRoblox" placeholder="https://roblox.com/users/..."></div>
           <div class="field"><label>youtube / twitch</label><input type="text" id="pStream" placeholder="optional"></div>
-          <div class="field"><label>favorite build</label><input type="text" id="pFav" placeholder="Glitch Tower, Static District..."></div>
+          <div class="field"><label>account type</label>
+            <select id="pRole">
+              <option value="player">Player</option>
+              <option value="developer">Developer</option>
+              <option value="group">Group</option>
+            </select>
+          </div>
         </div>
 
         <div class="save-row">
           <button class="btn btn-primary" id="saveProfileBtn">save profile</button>
           <button id="logoutBtn">log out</button>
           <span id="saveStatus"></span>
+        </div>
+
+        <!-- developer / group upload form -->
+        <div class="upload-block" id="uploadBlock" style="display:none;">
+          <div class="term-line"><span class="pfx">$</span> upload --game</div>
+          <div class="profile-grid">
+            <div class="field"><label>game title</label><input type="text" id="gTitle" placeholder="Glitch Tower"></div>
+            <div class="field"><label>category tag</label><input type="text" id="gTag" placeholder="OBBY // CO-OP"></div>
+            <div class="field" style="grid-column:1/-1;"><label>description</label><textarea id="gDesc" rows="2" placeholder="what's the game about"></textarea></div>
+            <div class="field"><label>game link (roblox url)</label><input type="text" id="gLink" placeholder="https://www.roblox.com/games/..."></div>
+            <div class="field"><label>status</label>
+              <select id="gStatus">
+                <option value="live">Live</option>
+                <option value="in dev">In Development</option>
+              </select>
+            </div>
+          </div>
+          <div class="save-row">
+            <button class="btn btn-primary" id="uploadGameBtn">upload game</button>
+            <span id="uploadStatus"></span>
+          </div>
+        </div>
+
+        <div class="locked-note" id="lockedNote" style="display:none;">
+          Game uploads are for <strong>Developer</strong> and <strong>Group</strong> accounts. Switch your account type above and save to unlock the upload form — that's how we know which games belong to real builders.
         </div>
       </div>
     </div>
@@ -317,19 +395,69 @@
 </footer>
 
 <script>
-// ---------- tiny local "auth" (client-side demo storage, not secure) ----------
+// ---------- tiny local "auth" + game storage (client-side demo, not secure) ----------
 const DB_KEY = "mrw3bs1t3_users";
 const SESSION_KEY = "mrw3bs1t3_session";
+const GAMES_KEY = "mrw3bs1t3_games";
 
 function getUsers(){ return JSON.parse(localStorage.getItem(DB_KEY) || "{}"); }
 function saveUsers(u){ localStorage.setItem(DB_KEY, JSON.stringify(u)); }
 function getSession(){ return localStorage.getItem(SESSION_KEY); }
 function setSession(u){ localStorage.setItem(SESSION_KEY, u); }
 function clearSession(){ localStorage.removeItem(SESSION_KEY); }
+function getGames(){ return JSON.parse(localStorage.getItem(GAMES_KEY) || "[]"); }
+function saveGames(g){ localStorage.setItem(GAMES_KEY, JSON.stringify(g)); }
 
 const accountSection = document.getElementById('accountSection');
 const profileSection = document.getElementById('profileSection');
 const authNavBtn = document.getElementById('authNavBtn');
+const uploadBlock = document.getElementById('uploadBlock');
+const lockedNote = document.getElementById('lockedNote');
+
+function roleLabel(role){
+  if(role === 'developer') return 'developer';
+  if(role === 'group') return 'group';
+  return 'player';
+}
+
+function renderGames(){
+  const grid = document.getElementById('gamesGrid');
+  const games = getGames();
+  if(games.length === 0){
+    grid.innerHTML = '<div class="empty-state">no games uploaded yet. create a developer or group account to be the first.<br><a id="emptyCta" class="btn btn-ghost" style="display:inline-block;margin-top:14px;">create a developer account</a></div>';
+    const cta = document.getElementById('emptyCta');
+    if(cta) cta.addEventListener('click', ()=>document.getElementById('account').scrollIntoView({behavior:'smooth'}));
+    return;
+  }
+  grid.innerHTML = games.map((g, i) => `
+    <div class="card">
+      ${getSession() === g.author ? `<button class="removeBtn" data-idx="${i}">remove</button>` : ''}
+      <span class="tag">${escapeHtml(g.tag || 'GAME')}</span>
+      <h3>${escapeHtml(g.title)}</h3>
+      <p>${escapeHtml(g.desc || '')}</p>
+      <div class="stat">
+        <span>${g.status === 'in dev' ? '● in dev' : '● live'}</span>
+        ${g.link ? `<a href="${escapeAttr(g.link)}" target="_blank" rel="noopener">play ↗</a>` : ''}
+      </div>
+      <span class="by">by ${escapeHtml(g.author)} <span class="role">(${escapeHtml(g.authorRole)})</span></span>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.removeBtn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const idx = parseInt(btn.getAttribute('data-idx'));
+      const all = getGames();
+      all.splice(idx,1);
+      saveGames(all);
+      renderGames();
+    });
+  });
+}
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+}
+function escapeAttr(str){ return escapeHtml(str); }
 
 function showProfile(username){
   accountSection.style.display = 'none';
@@ -339,13 +467,29 @@ function showProfile(username){
   authNavBtn.textContent = 'log out';
 
   const users = getUsers();
-  const p = users[username]?.profile || {};
+  const userObj = users[username] || {};
+  const p = userObj.profile || {};
+  const role = userObj.role || 'player';
+
   document.getElementById('pBio').value = p.bio || '';
   document.getElementById('pDiscord').value = p.discord || '';
   document.getElementById('pSpeedrun').value = p.speedrun || '';
   document.getElementById('pRoblox').value = p.roblox || '';
   document.getElementById('pStream').value = p.stream || '';
-  document.getElementById('pFav').value = p.fav || '';
+  document.getElementById('pRole').value = role;
+  document.getElementById('roleBadge').textContent = roleLabel(role);
+
+  updateUploadVisibility(role);
+}
+
+function updateUploadVisibility(role){
+  if(role === 'developer' || role === 'group'){
+    uploadBlock.style.display = 'block';
+    lockedNote.style.display = 'none';
+  } else {
+    uploadBlock.style.display = 'none';
+    lockedNote.style.display = 'block';
+  }
 }
 
 function showAuth(){
@@ -355,6 +499,7 @@ function showAuth(){
 }
 
 // restore session on load
+renderGames();
 const existing = getSession();
 if(existing){ showProfile(existing); } else { showAuth(); }
 
@@ -382,16 +527,26 @@ tabSignup.addEventListener('click', ()=>{
   signupForm.style.display='block'; loginForm.style.display='none';
 });
 
+// role card selection (signup)
+document.querySelectorAll('.role-card').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('selected'));
+    card.classList.add('selected');
+    card.querySelector('input').checked = true;
+  });
+});
+
 // signup
 signupForm.addEventListener('submit', (e)=>{
   e.preventDefault();
   const user = document.getElementById('suUser').value.trim();
   const pass = document.getElementById('suPass').value;
+  const role = document.querySelector('input[name="role"]:checked').value;
   const err = document.getElementById('suError');
   const users = getUsers();
   if(!user || !pass){ err.textContent = 'fill in both fields.'; return; }
   if(users[user]){ err.textContent = 'that username is taken.'; return; }
-  users[user] = { pass, profile: {} };
+  users[user] = { pass, role, profile: {} };
   saveUsers(users);
   setSession(user);
   err.textContent = '';
@@ -414,23 +569,64 @@ loginForm.addEventListener('submit', (e)=>{
   showProfile(user);
 });
 
+// role change inside profile updates upload visibility live
+document.getElementById('pRole').addEventListener('change', (e)=>{
+  updateUploadVisibility(e.target.value);
+});
+
 // save profile
 document.getElementById('saveProfileBtn').addEventListener('click', ()=>{
   const user = getSession();
   if(!user) return;
   const users = getUsers();
+  const newRole = document.getElementById('pRole').value;
+  users[user].role = newRole;
   users[user].profile = {
     bio: document.getElementById('pBio').value,
     discord: document.getElementById('pDiscord').value,
     speedrun: document.getElementById('pSpeedrun').value,
     roblox: document.getElementById('pRoblox').value,
     stream: document.getElementById('pStream').value,
-    fav: document.getElementById('pFav').value,
   };
   saveUsers(users);
+  document.getElementById('roleBadge').textContent = roleLabel(newRole);
+  updateUploadVisibility(newRole);
   const status = document.getElementById('saveStatus');
   status.textContent = '✓ saved';
   setTimeout(()=>status.textContent='', 2000);
+});
+
+// upload game
+document.getElementById('uploadGameBtn').addEventListener('click', ()=>{
+  const user = getSession();
+  if(!user) return;
+  const users = getUsers();
+  const role = users[user].role;
+  const status = document.getElementById('uploadStatus');
+
+  const title = document.getElementById('gTitle').value.trim();
+  if(!title){ status.textContent = 'give your game a title.'; status.style.color = 'var(--magenta)'; return; }
+
+  const games = getGames();
+  games.unshift({
+    title,
+    tag: document.getElementById('gTag').value.trim(),
+    desc: document.getElementById('gDesc').value.trim(),
+    link: document.getElementById('gLink').value.trim(),
+    status: document.getElementById('gStatus').value,
+    author: user,
+    authorRole: roleLabel(role),
+  });
+  saveGames(games);
+  renderGames();
+
+  document.getElementById('gTitle').value = '';
+  document.getElementById('gTag').value = '';
+  document.getElementById('gDesc').value = '';
+  document.getElementById('gLink').value = '';
+  status.style.color = 'var(--good)';
+  status.textContent = '✓ game uploaded';
+  setTimeout(()=>status.textContent='', 2500);
 });
 
 // logout
